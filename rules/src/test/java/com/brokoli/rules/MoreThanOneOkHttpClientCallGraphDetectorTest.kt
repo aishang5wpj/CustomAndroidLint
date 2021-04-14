@@ -24,8 +24,7 @@ class MoreThanOneOkHttpClientCallGraphDetectorTest : AndroidSdkLintDetectorTest(
         """
     ).indented()
 
-    @Test
-    fun `no call to OkHttpClient constructor`() {
+    fun `test no call to OkHttpClient constructor`() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -47,8 +46,7 @@ class MoreThanOneOkHttpClientCallGraphDetectorTest : AndroidSdkLintDetectorTest(
         lintResult.expectClean()
     }
 
-    @Test
-    fun `one call to OkHttpClient constructor`() {
+    fun `test one call to OkHttpClient constructor`() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -72,8 +70,7 @@ class MoreThanOneOkHttpClientCallGraphDetectorTest : AndroidSdkLintDetectorTest(
         lintResult.expectClean()
     }
 
-    @Test
-    fun `two calls to OkHttpClient constructor in the same file`() {
+    fun `test two calls to OkHttpClient constructor in the same file`() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -111,8 +108,7 @@ class MoreThanOneOkHttpClientCallGraphDetectorTest : AndroidSdkLintDetectorTest(
             """.trimIndent())
     }
 
-    @Test
-    fun `two calls to OkHttpClient constructor in different files`() {
+    fun `test two calls to OkHttpClient constructor in different files`() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -161,8 +157,7 @@ class MoreThanOneOkHttpClientCallGraphDetectorTest : AndroidSdkLintDetectorTest(
             """.trimIndent())
     }
 
-    @Test
-    fun `test multiple calls to method which created OkHttpClient`() {
+    fun `test test multiple calls to method which created OkHttpClient`() {
         val kotlinFile = kotlin(
             """
             package com.brokoli.lint
@@ -204,8 +199,7 @@ class MoreThanOneOkHttpClientCallGraphDetectorTest : AndroidSdkLintDetectorTest(
             """.trimIndent())
     }
 
-    @Test
-    fun `test multiple calls to method which created OkHttpClient in multiple files`() {
+    fun `test test multiple calls to method which created OkHttpClient in multiple files`() {
         val javaFile = java(
             """
             package com.brokoli.lint;

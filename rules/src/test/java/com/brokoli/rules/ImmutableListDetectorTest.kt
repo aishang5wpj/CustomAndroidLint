@@ -10,8 +10,7 @@ class ImmutableListDetectorTest : AndroidSdkLintDetectorTest() {
 
     override fun getIssues(): MutableList<Issue> = mutableListOf(ImmutableListDetector.ISSUE)
 
-    @Test
-    fun `pass mutable list to Java method which does not mutate list`() {
+    fun `test pass mutable list to Java method which does not mutate list`() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -48,8 +47,7 @@ class ImmutableListDetectorTest : AndroidSdkLintDetectorTest() {
         lintResult.expectClean()
     }
 
-    @Test
-    fun `pass mutable list to Java method which mutates list`() {
+    fun `test pass mutable list to Java method which mutates list`() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -86,8 +84,7 @@ class ImmutableListDetectorTest : AndroidSdkLintDetectorTest() {
         lintResult.expectClean()
     }
 
-    @Test
-    fun `pass immutable list to Java method which mutates list`() {
+    fun `test pass immutable list to Java method which mutates list`() {
         val javaFile = java(
             """
             package com.brokoli.lint;

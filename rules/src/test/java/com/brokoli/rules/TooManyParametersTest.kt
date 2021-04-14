@@ -11,8 +11,7 @@ class TooManyParametersDetectorTest : AndroidSdkLintDetectorTest() {
 
     override fun getIssues(): MutableList<Issue> = mutableListOf(TooManyParametersDetector.ISSUE)
 
-    @Test
-    fun `java method with 0 parameters`() {
+    fun `test java method with 0 parameters`() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -34,8 +33,7 @@ class TooManyParametersDetectorTest : AndroidSdkLintDetectorTest() {
         lintResult.expectClean()
     }
 
-    @Test
-    fun `java method with 1 parameter`() {
+    fun `test java method with 1 parameter`() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -57,8 +55,7 @@ class TooManyParametersDetectorTest : AndroidSdkLintDetectorTest() {
         lintResult.expectClean()
     }
 
-    @Test
-    fun `java method with 5 parameters`() {
+    fun `test java method with 5 parameters`() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -80,8 +77,7 @@ class TooManyParametersDetectorTest : AndroidSdkLintDetectorTest() {
         lintResult.expectClean()
     }
 
-    @Test
-    fun `java method with 6 parameters`() {
+    fun `test java method with 6 parameters`() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -112,8 +108,7 @@ class TooManyParametersDetectorTest : AndroidSdkLintDetectorTest() {
             )
     }
 
-    @Test
-    fun `kotlin method with 0 parameters`() {
+    fun `test kotlin method with 0 parameters`() {
         val kotlinFile = kotlin(
             """
             package com.brokoli.lint;
@@ -135,8 +130,7 @@ class TooManyParametersDetectorTest : AndroidSdkLintDetectorTest() {
         lintResult.expectClean()
     }
 
-    @Test
-    fun `kotlin method with 1 parameter`() {
+    fun `test kotlin method with 1 parameter`() {
         val kotlinFile = kotlin(
             """
             package com.brokoli.lint;
@@ -158,8 +152,7 @@ class TooManyParametersDetectorTest : AndroidSdkLintDetectorTest() {
         lintResult.expectClean()
     }
 
-    @Test
-    fun `kotlin method with 5 parameters`() {
+    fun `test kotlin method with 5 parameters`() {
         val kotlinFile = kotlin(
             """
             package com.brokoli.lint;
@@ -181,8 +174,7 @@ class TooManyParametersDetectorTest : AndroidSdkLintDetectorTest() {
         lintResult.expectClean()
     }
 
-    @Test
-    fun `kotlin method with 6 parameters`() {
+    fun `test kotlin method with 6 parameters`() {
         val kotlinFile = kotlin(
             """
             package com.brokoli.lint;
@@ -213,8 +205,7 @@ class TooManyParametersDetectorTest : AndroidSdkLintDetectorTest() {
             )
     }
 
-    @Test
-    fun `kotlin method with 0 and 6 parameters`() {
+    fun `test kotlin method with 0 and 6 parameters`() {
         val kotlinFile = kotlin(
             """
             package com.brokoli.lint;
@@ -249,8 +240,7 @@ class TooManyParametersDetectorTest : AndroidSdkLintDetectorTest() {
             )
     }
 
-    @Test
-    fun `kotlin method with 6 and 8 parameters`() {
+    fun `test kotlin method with 6 and 8 parameters`() {
         val kotlinFile = kotlin(
             """
             package com.brokoli.lint;

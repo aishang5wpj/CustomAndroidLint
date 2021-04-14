@@ -11,8 +11,7 @@ class KotlinShouldHandleJavaExceptionsDetectorTest : AndroidSdkLintDetectorTest(
 
     override fun getIssues(): MutableList<Issue> = mutableListOf(KotlinShouldHandleJavaExceptionsDetector.ISSUE)
 
-    @Test
-    fun detectKotlinCallsJavaMethodWhichThrowsException() {
+    fun testdetectKotlinCallsJavaMethodWhichThrowsException() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -58,8 +57,7 @@ class KotlinShouldHandleJavaExceptionsDetectorTest : AndroidSdkLintDetectorTest(
             )
     }
 
-    @Test
-    fun detectKotlinCallsJavaMethodWhichThrowsExceptionWithTryCatch() {
+    fun testdetectKotlinCallsJavaMethodWhichThrowsExceptionWithTryCatch() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -102,8 +100,7 @@ class KotlinShouldHandleJavaExceptionsDetectorTest : AndroidSdkLintDetectorTest(
         lintResult.expectClean()
     }
 
-    @Test
-    fun detectKotlinCallsJavaMethodWhichThrowsExceptionWithTryCatchWithException() {
+    fun testdetectKotlinCallsJavaMethodWhichThrowsExceptionWithTryCatchWithException() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -146,8 +143,7 @@ class KotlinShouldHandleJavaExceptionsDetectorTest : AndroidSdkLintDetectorTest(
         lintResult.expectClean()
     }
 
-    @Test
-    fun detectKotlinCallsJavaMethodWhichThrowsExceptionWithWrongTryCatch() {
+    fun testdetectKotlinCallsJavaMethodWhichThrowsExceptionWithWrongTryCatch() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -199,8 +195,7 @@ class KotlinShouldHandleJavaExceptionsDetectorTest : AndroidSdkLintDetectorTest(
             )
     }
 
-    @Test
-    fun detectKotlinCallsJavaMethodWhichThrowsExceptionWithWrongCatch() {
+    fun testdetectKotlinCallsJavaMethodWhichThrowsExceptionWithWrongCatch() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -251,8 +246,7 @@ class KotlinShouldHandleJavaExceptionsDetectorTest : AndroidSdkLintDetectorTest(
             )
     }
 
-    @Test
-    fun detectKotlinCallsJavaMethodWhichThrowsExceptionWithTwoTryCatch() {
+    fun testdetectKotlinCallsJavaMethodWhichThrowsExceptionWithTwoTryCatch() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -306,8 +300,7 @@ class KotlinShouldHandleJavaExceptionsDetectorTest : AndroidSdkLintDetectorTest(
     }
 
 
-    @Test
-    fun detectKotlinCallsJavaMethodWhichThrowsExceptionWithTwoWrongTryCatch() {
+    fun testdetectKotlinCallsJavaMethodWhichThrowsExceptionWithTwoWrongTryCatch() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -363,8 +356,7 @@ class KotlinShouldHandleJavaExceptionsDetectorTest : AndroidSdkLintDetectorTest(
             )
     }
 
-    @Test
-    fun detectKotlinCallsJavaMethodWhichThrowsExceptionCachingWrongException() {
+    fun testdetectKotlinCallsJavaMethodWhichThrowsExceptionCachingWrongException() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -416,8 +408,7 @@ class KotlinShouldHandleJavaExceptionsDetectorTest : AndroidSdkLintDetectorTest(
             )
     }
 
-    @Test
-    fun detectKotlinCallsJavaMethodWhichThrowsExceptionCachingInNestedCatch() {
+    fun testdetectKotlinCallsJavaMethodWhichThrowsExceptionCachingInNestedCatch() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -465,8 +456,7 @@ class KotlinShouldHandleJavaExceptionsDetectorTest : AndroidSdkLintDetectorTest(
         lintResult.expectClean()
     }
 
-    @Test
-    fun detectKotlinCallsJavaMethodWhichThrowsExceptionCachingInNotNestedCatch() {
+    fun testdetectKotlinCallsJavaMethodWhichThrowsExceptionCachingInNotNestedCatch() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -514,8 +504,7 @@ class KotlinShouldHandleJavaExceptionsDetectorTest : AndroidSdkLintDetectorTest(
         lintResult.expectClean()
     }
 
-    @Test
-    fun detectKotlinCallsJavaMethodWhichThrowsExceptionCachingInFirstCatch() {
+    fun testdetectKotlinCallsJavaMethodWhichThrowsExceptionCachingInFirstCatch() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -561,8 +550,7 @@ class KotlinShouldHandleJavaExceptionsDetectorTest : AndroidSdkLintDetectorTest(
         lintResult.expectClean()
     }
 
-    @Test
-    fun detectKotlinCallsJavaMethodWhichThrowsExceptionCachingInSecondCatch() {
+    fun testdetectKotlinCallsJavaMethodWhichThrowsExceptionCachingInSecondCatch() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -608,8 +596,7 @@ class KotlinShouldHandleJavaExceptionsDetectorTest : AndroidSdkLintDetectorTest(
         lintResult.expectClean()
     }
 
-    @Test
-    fun detectKotlinCallsJavaMethodWhichThrowsMultipleExceptionsAndCatchesSeparately() {
+    fun testdetectKotlinCallsJavaMethodWhichThrowsMultipleExceptionsAndCatchesSeparately() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -656,8 +643,7 @@ class KotlinShouldHandleJavaExceptionsDetectorTest : AndroidSdkLintDetectorTest(
         lintResult.expectClean()
     }
 
-    @Test
-    fun detectKotlinCallsJavaMethodWhichThrowsMultipleExceptionsAndCatchesTogether() {
+    fun testdetectKotlinCallsJavaMethodWhichThrowsMultipleExceptionsAndCatchesTogether() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -702,8 +688,7 @@ class KotlinShouldHandleJavaExceptionsDetectorTest : AndroidSdkLintDetectorTest(
         lintResult.expectClean()
     }
 
-    @Test
-    fun detectKotlinCallsJavaMethodWhichThrowsMultipleExceptionsAndOnlyCatchesOne() {
+    fun testdetectKotlinCallsJavaMethodWhichThrowsMultipleExceptionsAndOnlyCatchesOne() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -754,8 +739,7 @@ class KotlinShouldHandleJavaExceptionsDetectorTest : AndroidSdkLintDetectorTest(
             """.trimIndent())
     }
 
-    @Test
-    fun detectKotlinCallsJavaMethodWhichThrowsMultipleExceptionsAndODoNotCatch() {
+    fun testdetectKotlinCallsJavaMethodWhichThrowsMultipleExceptionsAndODoNotCatch() {
         val javaFile = java(
             """
             package com.brokoli.lint;

@@ -11,8 +11,7 @@ class KotlinShouldNotThrowExceptionsDetectorTest : AndroidSdkLintDetectorTest() 
 
     override fun getIssues(): MutableList<Issue> = mutableListOf(KotlinShouldNotThrowExceptionsDetector.ISSUE)
 
-    @Test
-    fun detectJavaDoesNotThrowExceptions() {
+    fun testdetectJavaDoesNotThrowExceptions() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -38,8 +37,7 @@ class KotlinShouldNotThrowExceptionsDetectorTest : AndroidSdkLintDetectorTest() 
         lintResult.expectClean()
     }
 
-    @Test
-    fun detectJavaThrowsOneException() {
+    fun testdetectJavaThrowsOneException() {
         val javaFile = java(
             """
             package com.brokoli.lint;
@@ -63,8 +61,7 @@ class KotlinShouldNotThrowExceptionsDetectorTest : AndroidSdkLintDetectorTest() 
         lintResult.expectClean()
     }
 
-    @Test
-    fun detectKotlinDoesNotThrowExceptions() {
+    fun testdetectKotlinDoesNotThrowExceptions() {
         val kotlinFile = kotlin(
             """
             package com.brokoli.lint
@@ -90,8 +87,7 @@ class KotlinShouldNotThrowExceptionsDetectorTest : AndroidSdkLintDetectorTest() 
         lintResult.expectClean()
     }
 
-    @Test
-    fun detectKotlinHasOneThrowsAnnotation() {
+    fun testdetectKotlinHasOneThrowsAnnotation() {
         val kotlinFile = kotlin(
             """
             package com.brokoli.lint
@@ -129,8 +125,7 @@ class KotlinShouldNotThrowExceptionsDetectorTest : AndroidSdkLintDetectorTest() 
             )
     }
 
-    @Test
-    fun detectKotlinHasTwoThrowsAnnotations() {
+    fun testdetectKotlinHasTwoThrowsAnnotations() {
         val kotlinFile = kotlin(
             """
             package com.brokoli.lint
@@ -173,8 +168,7 @@ class KotlinShouldNotThrowExceptionsDetectorTest : AndroidSdkLintDetectorTest() 
             )
     }
 
-    @Test
-    fun detectKotlinThrowsException() {
+    fun testdetectKotlinThrowsException() {
         val kotlinFile = kotlin(
             """
             package com.brokoli.lint
@@ -207,8 +201,7 @@ class KotlinShouldNotThrowExceptionsDetectorTest : AndroidSdkLintDetectorTest() 
             )
     }
 
-    @Test
-    fun detectKotlinThrowsCheckedException() {
+    fun testdetectKotlinThrowsCheckedException() {
         val kotlinFile = kotlin(
             """
             package com.brokoli.lint
@@ -241,8 +234,7 @@ class KotlinShouldNotThrowExceptionsDetectorTest : AndroidSdkLintDetectorTest() 
             )
     }
 
-    @Test
-    fun detectKotlinThrowsRuntimeException() {
+    fun testdetectKotlinThrowsRuntimeException() {
         val kotlinFile = kotlin(
             """
             package com.brokoli.lint
@@ -266,8 +258,7 @@ class KotlinShouldNotThrowExceptionsDetectorTest : AndroidSdkLintDetectorTest() 
         lintResult.expectClean()
     }
 
-    @Test
-    fun detectKotlinThrowsUncheckedException() {
+    fun testdetectKotlinThrowsUncheckedException() {
         val kotlinFile = kotlin(
             """
             package com.brokoli.lint
