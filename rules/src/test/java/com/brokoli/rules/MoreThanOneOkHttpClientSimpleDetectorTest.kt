@@ -1,0 +1,191 @@
+package com.brokoli.rules
+
+import com.android.tools.lint.detector.api.Detector
+import com.android.tools.lint.detector.api.Issue
+
+@Suppress("UnstableApiUsage")
+class MoreThanOneOkHttpClientSimpleDetectorTest : AndroidSdkLintDetectorTest() {
+
+    override fun getDetector(): Detector = MoreThanOneOkHttpClientSimpleDetector()
+
+    override fun getIssues(): MutableList<Issue> = mutableListOf(MoreThanOneOkHttpClientSimpleDetector.ISSUE)
+
+    private val okHttpClientFile = java(
+        """
+            package okhttp3;
+
+            class OkHttpClient {
+                
+                public OkHttpClient() {
+                }
+                
+            }
+        """
+    ).indented()
+
+    fun `test no call to OkHttpClient constructor`() {
+        val javaFile = java(
+            """
+            package com.brokoli.lint;
+
+            class MyClass {
+                
+                public void method1() {
+                    
+                }
+                
+            }
+        """
+        ).indented()
+
+        val lintResult = lint()
+            .files(javaFile)
+            .run()
+
+        lintResult.expectClean()
+    }
+
+    fun `test one call to OkHttpClient constructor`() {
+        val javaFile = java(
+            """
+            package com.brokoli.lint;
+            
+            import okhttp3.OkHttpClient;
+
+            class MyClass {
+                
+                public void method1() {
+                    new OkHttpClient();
+                }
+                
+            }
+        """
+        ).indented()
+
+        val lintResult = lint()
+            .files(okHttpClientFile, javaFile)
+            .run()
+
+        lintResult.expectClean()
+    }
+
+    fun `test two calls to OkHttpClient constructor in the same file`() {
+        val javaFile = java(
+            """
+            package com.brokoli.lint;
+            
+            import okhttp3.OkHttpClient;
+
+            class MyClass {
+                
+                public void method1() {
+                    new OkHttpClient();
+                }
+                
+                public void method2() {
+                    new OkHttpClient();
+                }
+                
+            }
+        """
+        ).indented()
+
+        val lintResult = lint()
+            .files(okHttpClientFile, javaFile)
+            .run()
+
+        lintResult
+            .expectWarningCount(2)
+            .expect("""
+                src/com/brokoli/lint/MyClass.java:8: Warning: You should only create one OkHttpClient instance [MoreThanOneOkHttpClientSimpleDetector]
+                        new OkHttpClient();
+                        ~~~~~~~~~~~~~~~~~~
+                src/com/brokoli/lint/MyClass.java:12: Warning: You should only create one OkHttpClient instance [MoreThanOneOkHttpClientSimpleDetector]
+                        new OkHttpClient();
+                        ~~~~~~~~~~~~~~~~~~
+                0 errors, 2 warnings
+            """.trimIndent())
+    }
+
+    fun `test two calls to OkHttpClient constructor in different files`() {
+        val javaFile = java(
+            """
+            package com.brokoli.lint;
+            
+            import okhttp3.OkHttpClient;
+
+            class MyClass {
+                
+                public void method1() {
+                    new OkHttpClient();
+                }
+                
+            }
+        """
+        ).indented()
+        val kotlinFile = kotlin(
+            """
+            package com.brokoli.lint
+            
+            import okhttp3.OkHttpClient
+
+            class MyClass {
+                
+                fun method1() {
+                    OkHttpClient()
+                }
+                
+            }
+        """
+        ).indented()
+
+        val lintResult = lint()
+            .files(okHttpClientFile, javaFile, kotlinFile)
+            .run()
+
+        lintResult
+            .expectWarningCount(2)
+            .expect("""
+                src/com/brokoli/lint/MyClass.java:8: Warning: You should only create one OkHttpClient instance [MoreThanOneOkHttpClientSimpleDetector]
+                        new OkHttpClient();
+                        ~~~~~~~~~~~~~~~~~~
+                src/com/brokoli/lint/MyClass.kt:8: Warning: You should only create one OkHttpClient instance [MoreThanOneOkHttpClientSimpleDetector]
+                        OkHttpClient()
+                        ~~~~~~~~~~~~~~
+                0 errors, 2 warnings
+            """.trimIndent())
+    }
+
+    fun `test test multiple calls to method which created OkHttpClient`() {
+        val kotlinFile = kotlin(
+            """
+            package com.brokoli.lint
+            
+            import okhttp3.OkHttpClient
+
+            class MyClass {
+                
+                fun method1() {
+                    OkHttpClient()
+                }
+                
+                fun method2() {
+                    method1()
+                }
+                
+                fun method3() {
+                    method1()
+                }
+                
+            }
+        """
+        ).indented()
+
+        val lintResult = lint()
+            .files(okHttpClientFile, kotlinFile)
+            .run()
+
+        lintResult.expectClean()
+    }
+
+}
